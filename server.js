@@ -32,7 +32,6 @@ mongoose.connection
 // MODELS
 ////////////////////////////////
 const CardSchema = new mongoose.Schema({
-  key: Number,
   question: String,
   overview: String,
   tips: String,
