@@ -1,6 +1,5 @@
-///////////////////////////////
 // DEPENDENCIES
-////////////////////////////////
+
 // get .env variables
 require("dotenv").config();
 // pull PORT from .env, give default value of 3001
@@ -17,9 +16,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
 
-///////////////////////////////
 // DATABASE CONNECTION
-////////////////////////////////
+
 // Establish Connection
 mongoose.connect(DATABASE_URL);
 // Connection Events
@@ -28,29 +26,29 @@ mongoose.connection
   .on("close", () => console.log("You are disconnected from MongoDB"))
   .on("error", (error) => console.log(error));
 
-///////////////////////////////
 // MODELS
-////////////////////////////////
-const CardSchema = new mongoose.Schema({
-  question: String,
-  overview: String,
-  tips: String,
-  answerFramework: String,
-  answer: String,
-});
+
+const CardSchema = new mongoose.Schema(
+  {
+    question: String,
+    overview: String,
+    tip: String,
+    framework: String,
+    answer: String,
+  },
+  { versionKey: "_somethingElse" }
+);
 
 const Card = mongoose.model("Card", CardSchema);
 
-///////////////////////////////
 // MiddleWare
-////////////////////////////////
+
 app.use(cors()); // to prevent cors errors, open access to all origins
 app.use(morgan("dev")); // logging
 app.use(express.json()); // parse json bodies
 
-///////////////////////////////
 // ROUTES
-////////////////////////////////
+
 // create a test route
 app.get("/", (req, res) => {
   res.send("hello world");
@@ -102,7 +100,6 @@ app.put("/cards/:id", async (req, res) => {
   }
 });
 
-///////////////////////////////
 // LISTENER
-////////////////////////////////
+
 app.listen(PORT, () => console.log(`listening on PORT ${PORT}`));
