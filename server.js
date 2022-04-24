@@ -28,16 +28,13 @@ mongoose.connection
 
 // MODELS
 
-const CardSchema = new mongoose.Schema(
-  {
-    question: String,
-    overview: String,
-    tip: String,
-    framework: String,
-    answer: String,
-  },
-  { versionKey: "_somethingElse" }
-);
+const CardSchema = new mongoose.Schema({
+  question: String,
+  overview: String,
+  tips: String,
+  framework: String,
+  answer: String,
+});
 
 const Card = mongoose.model("Card", CardSchema);
 
